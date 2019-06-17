@@ -103,15 +103,12 @@ class NcProductionNotesGrid extends PolymerElement {
   setOptions(productionNotesOptions){
     this.set('productionNotesElementsGridData',[]);
     this.set('productionNotesOptions',[]);
-    let productionNotesOptionsFiltered = productionNotesOptions.filter(this.checkOptionVisible);
-    this.set('productionNotesOptions',productionNotesOptionsFiltered);
+    this.set('productionNotesOptions',productionNotesOptions);
     // flush();
     this.selectDefaultOption();
   }
 
-  checkOptionVisible(productionNotesOption){
-    return (productionNotesOption.hasOwnProperty('visible') ? false: true);
-  }
+
 
   selectDefaultOption(){
     this.productionNotesOptionCodeSelected = this.productionNotesOptions[0].code;
@@ -121,6 +118,10 @@ class NcProductionNotesGrid extends PolymerElement {
   _productionNotesOptionSelected(option){
     this.productionNotesOptionCodeSelected = option.detail.code;
     this.productionNotesElementsGridData = option.detail.content;
+
+    if (option.detail.code === 'CUSTOMPRODUCTIONNOTES'){
+      this.dispatchEvent(new CustomEvent('production-notes-option-custom-selected', {detail: {line: this.lineDocSelected}, bubbles: true, composed: true }));
+    }
   }
 
   _productionNotesOptionCodeSelected(option){
@@ -128,7 +129,8 @@ class NcProductionNotesGrid extends PolymerElement {
   }
 
   _productionNotesElementSelected(item){
-    this.dispatchEvent(new CustomEvent('production-notes-line-selected', {detail: {product: item.detail, productionNotesOptionCodeSelected: this.productionNotesOptionCodeSelected}, bubbles: true, composed: true }));
+    console.log(item)
+    this.dispatchEvent(new CustomEvent('production-notes-line-selected', {detail: {product: item.detail, line: this.lineDocSelected}, bubbles: true, composed: true }));
   }
 
   _heightProductionNotesButtonsChanged(){
