@@ -93,26 +93,34 @@ class NcProductionNotesGrid extends PolymerElement {
     super.connectedCallback();
   }
 
-
   setDocLineSelected(lineDocSelected){
     this.lineDocSelected = lineDocSelected;
   }
   
-
-
   setOptions(productionNotesOptions){
     this.set('productionNotesElementsGridData',[]);
     this.set('productionNotesOptions',[]);
     this.set('productionNotesOptions',productionNotesOptions);
-    // flush();
     this.selectDefaultOption();
   }
 
-
-
   selectDefaultOption(){
-    this.productionNotesOptionCodeSelected = this.productionNotesOptions[0].code;
-    this.productionNotesElementsGridData = this.productionNotesOptions[0].content;
+    let i;
+    let productionNotesOptionSelected;
+    productionNotesOptionSelected = false;
+
+    for (i in this.productionNotesOptions){
+      if (this.productionNotesOptions[i].code === this.productionNotesOptionCodeSelected) {
+        productionNotesOptionSelected = true;
+        this.productionNotesElementsGridData = this.productionNotesOptions[i].content;
+        break;
+      }
+    }
+
+    if (!productionNotesOptionSelected){
+      this.productionNotesOptionCodeSelected = this.productionNotesOptions[0].code;
+      this.productionNotesElementsGridData = this.productionNotesOptions[0].content;
+    }
   }
 
   _productionNotesOptionSelected(option){
@@ -129,7 +137,6 @@ class NcProductionNotesGrid extends PolymerElement {
   }
 
   _productionNotesElementSelected(item){
-    console.log(item)
     this.dispatchEvent(new CustomEvent('production-notes-line-selected', {detail: {product: item.detail, line: this.lineDocSelected}, bubbles: true, composed: true }));
   }
 
