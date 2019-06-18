@@ -10,7 +10,7 @@
     "url": "https://github.com/NEOGRUP/nc-production-notes-grid"
   },
   "name": "@neogrup/nc-production-notes-grid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
@@ -22,8 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "@polymer/polymer": "^3.0.0",
-    "@neogrup/nc-products-grid": "^2.0.0",
-    "@neogrup/nc-items-grid": "^2.0.9"
+    "@neogrup/nc-products-grid": "^2.0.2",
+    "@neogrup/nc-items-grid": "^2.0.10"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
