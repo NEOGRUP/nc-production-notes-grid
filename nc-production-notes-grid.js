@@ -29,6 +29,7 @@ class NcProductionNotesGrid extends PolymerElement {
             auto-flow
             item-height="[[heightProductionNotesGridItems]]"
             item-width="[[widthProductionNotesGridItems]]"
+            animations ="[[animations]]"
             on-item-selected="_productionNotesOptionSelected">
         </nc-items-grid>
       </div>
@@ -41,6 +42,7 @@ class NcProductionNotesGrid extends PolymerElement {
             height-products-grid-items="[[heightProductionNotesGridItems]]" 
             width-products-grid-items="[[widthProductionNotesGridItems]]" 
             loading="{{itemsGridLoading}}" 
+            animations ="[[animations]]"
             on-product-selected="_productionNotesElementSelected">
         </nc-products-grid>
       </div>
@@ -85,6 +87,10 @@ class NcProductionNotesGrid extends PolymerElement {
       viewModeProductionNotesGridItems: {
         type: String,
         reflectToAttribute: true
+      },
+      animations: {
+        type: Boolean,
+        value: false
       }
     };
   }
