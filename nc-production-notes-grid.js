@@ -41,7 +41,7 @@ class NcProductionNotesGrid extends PolymerElement {
             products-grid-data="{{productionNotesElementsGridData}}" 
             height-products-grid-items="[[heightProductionNotesGridItems]]" 
             width-products-grid-items="[[widthProductionNotesGridItems]]" 
-            loading="{{itemsGridLoading}}" 
+            loading="{{itemsGridLoading}}"
             animations ="[[animations]]"
             on-product-selected="_productionNotesElementSelected">
         </nc-products-grid>
@@ -143,7 +143,11 @@ class NcProductionNotesGrid extends PolymerElement {
   }
 
   _productionNotesElementSelected(item){
-    this.dispatchEvent(new CustomEvent('production-notes-line-selected', {detail: {product: item.detail, line: this.lineDocSelected}, bubbles: true, composed: true }));
+    if (item.detail.usedQty > 0){
+      this.dispatchEvent(new CustomEvent('open-production-notes-line-actions', {detail: {product: item.detail, line: this.lineDocSelected, productionNotesOptionCodeSelected: this.productionNotesOptionCodeSelected}, bubbles: true, composed: true }));
+    } else {
+      this.dispatchEvent(new CustomEvent('production-notes-line-selected', {detail: {product: item.detail, line: this.lineDocSelected}, bubbles: true, composed: true }));
+    }
   }
 
   _heightProductionNotesButtonsChanged(){
